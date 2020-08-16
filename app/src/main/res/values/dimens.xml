@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="alto_acho_imagen_login">190dp</dimen>
+    <dimen name="stroke_border_imagen_login">7dp</dimen>
+    <dimen name="margenRightLeft_boton_login">25dp</dimen>
+    <dimen name="textsize_boton_login">25sp</dimen>
+    <dimen name="margenTop_boton_login">10dp</dimen>
+    <dimen name="margenRightLeft_card_datos_login">25dp</dimen>
+    <dimen name="margenTop_Linear_layout_container_datos">30dp</dimen>
+    <dimen name="textsize_boton_agendar_cancelar">22sp</dimen>
+    <dimen name="alto_acho_boton_camera">100dp</dimen>
+    <dimen name="margenRightLeft_card_lista_seguimiento_preview_master">10dp</dimen>
+    <item name="layout_weihgt_linear_layout_imagenview_generar_cita" type="dimen" format="float">
+        0.5
+    </item>
+    <item name="layout_weihgt_linear_layout_contenedor_datos_generar_cita" type="dimen" format="float">
+        0.5
+    </item>
+</resources>

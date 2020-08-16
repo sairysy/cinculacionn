@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Puercos</string>
+    <string name="btn_ingresar">INGRESAR</string>
+    <string name="hint_ingrese_su_usuario">INGRESE SU USUARIO</string>
+    <string name="hint_ingrese_su_password">INGRESE SU CONTRASEÑA</string>
+    <string name="btn_cancelar">CANCELAR</string>
+    <string name="btn_guardar">AGENDAR</string>
+    <string name="hint_fecha_cita">INGRESE LA FECHA</string>
+    <string name="hint_hora_cita">INGRESE LA HORA</string>
+    <string name="hint_tipo_actividad">INGRESE LA ACTIVIDAD</string>
+    <string name="hint_detalle">INGRESE EL DETALLE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="subir_cita">AGENDAR</string>
+    <string name="resportes">INFORME</string>
+    <string name="salir_Sessiom">CERRAR SESION</string>
+    <string name="vacio" />
+    <string name="cannotopencamera">OPEN CAMERA</string>
+    <string name="segimiento_cita">SEGUIMIENTO</string>
+    <string name="segimiento_new_user">NUEVO USUARIO</string>
+    <string name="segimiento_rud_user">EDITAR USUARIOS</string>
+    <string name="url_login_user">http://192.168.1.2/services_unach/crud_usuarios/login.php</string>
+    <string name="url_update_user">http://192.168.1.2/services_unach/crud_usuarios/update.php</string>
+    <string name="url_insert_cita">http://192.168.1.2/services_unach/crud_citas/create.php</string>
+    <string name="url_update_estado_citas">http://192.168.1.2/services_unach/crud_citas/update.php</string>
+    <string name="btn_guardar_user">GUARDAR</string>
+    <string name="url_select_roles">http://192.168.1.2/services_unach/rol/read.php</string>
+</resources>

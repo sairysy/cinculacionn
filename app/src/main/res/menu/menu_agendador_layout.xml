@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:icon="@drawable/add_cita_agendar"
+    android:id="@+id/id_subir_cita"
+    android:title="@string/subir_cita"
+    >
+</item>
+    <item
+        android:icon="@drawable/reporte_agendar"
+        android:id="@+id/id_reporte_citas"
+        android:title="@string/resportes"
+        >
+    </item>
+    <item
+        android:id="@+id/id_salir_"
+        android:title="@string/salir_Sessiom"
+        >
+    </item>
+</menu>

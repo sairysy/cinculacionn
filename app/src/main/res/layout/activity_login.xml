@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/alto_acho_imagen_login"
+        android:layout_height="@dimen/alto_acho_imagen_login"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="@dimen/stroke_border_imagen_login"
+        android:src="@drawable/salud_puercos"
+        >
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/Linear_layout_container_datos_login"
+        android:layout_marginTop="@dimen/margenTop_Linear_layout_container_datos"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/_id_include_view_datos"
+            android:layout_marginRight="@dimen/margenRightLeft_card_datos_login"
+            android:layout_marginLeft="@dimen/margenRightLeft_card_datos_login"
+            layout="@layout/card_datos_login"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+        </include>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/id_btn_login"
+            android:text="@string/btn_ingresar"
+            android:textStyle="bold"
+            android:textSize="@dimen/textsize_boton_login"
+            android:layout_marginTop="@dimen/margenTop_boton_login"
+            android:layout_marginRight="@dimen/margenRightLeft_boton_login"
+            android:layout_marginLeft="@dimen/margenRightLeft_boton_login"
+            android:theme="@style/RaisedButtonDark"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+        </androidx.appcompat.widget.AppCompatButton>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

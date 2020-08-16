@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "649628788876",
+    "firebase_url": "https://seguimientocitasunach.firebaseio.com",
+    "project_id": "seguimientocitasunach",
+    "storage_bucket": "seguimientocitasunach.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649628788876:android:a10f2b7ae83383198473a9",
+        "android_client_info": {
+          "package_name": "com.virtualcode7ecuador.puercos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649628788876-8net4b56ij694chuk8hcp8up5jvkbais.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.virtualcode7ecuador.puercos",
+            "certificate_hash": "d41ab385a7fae4ae57bb8065691ae2c73e856ca4"
+          }
+        },
+        {
+          "client_id": "649628788876-tdl9n6mp2o9j8608qn2fi2564l4qfjqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBueOFEEZqqloZqmOWr6QsczBjbagofK40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649628788876-tdl9n6mp2o9j8608qn2fi2564l4qfjqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
