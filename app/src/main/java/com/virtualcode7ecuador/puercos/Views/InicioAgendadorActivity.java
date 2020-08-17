@@ -10,12 +10,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.virtualcode7ecuador.puercos.FragmentMaster.FragmentReport.ReportSeguimientoFragment;
 import com.virtualcode7ecuador.puercos.FragmentsAgendador.AgendarCitaFragment;
+import com.virtualcode7ecuador.puercos.LoginActivity;
 import com.virtualcode7ecuador.puercos.R;
 
 public class InicioAgendadorActivity extends AppCompatActivity
@@ -26,6 +29,7 @@ public class InicioAgendadorActivity extends AppCompatActivity
     private NavigationView navigationView;
     private Toolbar toolbar;
     private AlertDialog alertDialog;
+    private ReportSeguimientoFragment OreportSeguimientoFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -35,6 +39,7 @@ public class InicioAgendadorActivity extends AppCompatActivity
         navigationView= findViewById(R.id.id_navigation_view);
         toolbar = findViewById(R.id.toolbar_);
         OagendarCitaFragment = new AgendarCitaFragment();
+        OreportSeguimientoFragment = new ReportSeguimientoFragment();
         configurarToolbarHamborguer();
         fragmentManager = getSupportFragmentManager();
         configurarDrawer();
@@ -46,6 +51,11 @@ public class InicioAgendadorActivity extends AppCompatActivity
             {
                 switch (item.getItemId())
                 {
+                    case R.id.id_subir_cita:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,OreportSeguimientoFragment)
+                                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                        break;
                     case R.id.id_salir_:
                         alerDialogSalir();
                         break;
@@ -66,6 +76,9 @@ public class InicioAgendadorActivity extends AppCompatActivity
             {
                 Toast.makeText(InicioAgendadorActivity.this, "ADIOS ....",
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(InicioAgendadorActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         alertDialog = builder.create();
@@ -88,8 +101,14 @@ public class InicioAgendadorActivity extends AppCompatActivity
 
     private void llenarFragmentDefecto()
     {
-        fragmentManager.beginTransaction().add(R.id.fragment_container,OagendarCitaFragment)
+        fragmentManager.beginTransaction().add(R.id.fragment_container,OreportSeguimientoFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        return;
     }
 }

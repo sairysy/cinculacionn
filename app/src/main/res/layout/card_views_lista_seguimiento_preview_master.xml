@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:elevation="10dp"
+<androidx.cardview.widget.CardView
+    android:elevation="10dp"
     app:cardCornerRadius="20dp"
     android:layout_marginRight="@dimen/margenRightLeft_card_lista_seguimiento_preview_master"
     android:layout_marginLeft="@dimen/margenRightLeft_card_lista_seguimiento_preview_master"
+    android:layout_marginBottom="@dimen/margenRightLeft_card_lista_seguimiento_preview_master"
     android:background="@color/colorSecondaryText"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -18,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageview_preview_foto"
                 android:scaleType="centerCrop"
                 android:src="@drawable/salud_puercos"
                 android:layout_width="match_parent"
@@ -28,6 +31,38 @@
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/id_preview_fecha_card_"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"
+                    android:text="18-02-2020"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/id_preview_hora_card_"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"
+                    android:text="05:00:56"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/id_preview_actividad_card_"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"
+                    android:text="Actividad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

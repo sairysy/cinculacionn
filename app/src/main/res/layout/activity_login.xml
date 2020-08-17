@@ -30,6 +30,18 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
         </include>
+        <TextView
+            android:id="@+id/text_link"
+            android:textSize="@dimen/textsize_link_create_user_login"
+            android:layout_marginRight="@dimen/margenRightLeft_card_datos_login"
+            android:layout_marginLeft="@dimen/margenRightLeft_card_datos_login"
+            android:textAlignment="textEnd"
+            android:text="@string/text_registrar_agendador_login"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold|italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/id_btn_login"
             android:text="@string/btn_ingresar"

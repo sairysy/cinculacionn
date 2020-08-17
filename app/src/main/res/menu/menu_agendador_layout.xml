@@ -7,12 +7,7 @@
     >
 </item>
     <item
-        android:icon="@drawable/reporte_agendar"
-        android:id="@+id/id_reporte_citas"
-        android:title="@string/resportes"
-        >
-    </item>
-    <item
+        android:icon="@drawable/cerras_sess"
         android:id="@+id/id_salir_"
         android:title="@string/salir_Sessiom"
         >

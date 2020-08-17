@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Puercos</string>
+    <string name="app_name">SALUD APP</string>
     <string name="btn_ingresar">INGRESAR</string>
     <string name="hint_ingrese_su_usuario">INGRESE SU USUARIO</string>
     <string name="hint_ingrese_su_password">INGRESE SU CONTRASEÑA</string>
@@ -19,10 +19,20 @@
     <string name="segimiento_cita">SEGUIMIENTO</string>
     <string name="segimiento_new_user">NUEVO USUARIO</string>
     <string name="segimiento_rud_user">EDITAR USUARIOS</string>
-    <string name="url_login_user">http://192.168.1.2/services_unach/crud_usuarios/login.php</string>
-    <string name="url_update_user">http://192.168.1.2/services_unach/crud_usuarios/update.php</string>
-    <string name="url_insert_cita">http://192.168.1.2/services_unach/crud_citas/create.php</string>
-    <string name="url_update_estado_citas">http://192.168.1.2/services_unach/crud_citas/update.php</string>
+    <string name="url_login_user">http://www.vigitrackecuador.com/services_unach/crud_usuarios/login.php</string>
+    <string name="url_update_user">http://www.vigitrackecuador.com/services_unach/crud_usuarios/update.php</string>
+    <string name="url_insert_cita">http://www.vigitrackecuador.com/services_unach/crud_citas/create.php</string>
     <string name="btn_guardar_user">GUARDAR</string>
-    <string name="url_select_roles">http://192.168.1.2/services_unach/rol/read.php</string>
+    <string name="url_select_roles">http://www.vigitrackecuador.com/services_unach/rol/read.php</string>
+    <string name="btn_buscar_reportes">BUSCAR CITAS</string>
+    <string name="url_read_citas">http://www.vigitrackecuador.com/services_unach/crud_citas/read.php</string>
+    <string name="btn_asistido">ASISTIDO</string>
+    <string name="btn_falta">FALTA</string>
+    <string name="url_create_user">http://www.vigitrackecuador.com/services_unach/crud_usuarios/create.php</string>
+
+    <string name="url_update_estado_citas">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/update.php</string>
+    <string name="url_read_seguimiento">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/read.php</string>
+    <string name="url_update_estado_seguimiento">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/update.php</string>
+    <string name="url_insert_seguimiento">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/create.php</string>
+    <string name="text_registrar_agendador_login">Desea registrarse, aqui</string>
 </resources>

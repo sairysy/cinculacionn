@@ -14,7 +14,7 @@ tools:openDrawer="start">
     <include layout="@layout/view_toolbar">
     </include>
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_container_master"
         android:layout_marginTop="?actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

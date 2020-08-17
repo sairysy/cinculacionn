@@ -25,12 +25,7 @@
         >
     </item>
     <item
-        android:icon="@drawable/edit_user"
-        android:id="@+id/id_rud_user_master"
-        android:title="@string/segimiento_rud_user"
-        >
-    </item>
-    <item
+        android:icon="@drawable/cerras_sess"
         android:id="@+id/id_salir_"
         android:title="@string/salir_Sessiom"
         >

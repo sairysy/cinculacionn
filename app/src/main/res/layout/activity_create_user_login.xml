@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Views.CreateUserLoginActivity">
+    <include layout="@layout/view_toolbar">
+    </include>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/card_datos_login">
+        </include>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_btn_cancelar_registro_new_user"
+                android:textStyle="bold"
+                android:textSize="@dimen/textsize_boton_login"
+                android:layout_weight="0.5"
+                android:text="@string/btn_cancelar"
+                android:theme="@style/RaisedButtonRedDark"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_btn_guardar_registro_new_user"
+                android:textStyle="bold"
+                android:textSize="@dimen/textsize_boton_login"
+                android:layout_weight="0.5"
+                android:text="@string/btn_guardar_user"
+                android:theme="@style/RaisedButtonDark"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+            </androidx.appcompat.widget.AppCompatButton>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

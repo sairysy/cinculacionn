@@ -10,6 +10,8 @@
     <dimen name="textsize_boton_agendar_cancelar">22sp</dimen>
     <dimen name="alto_acho_boton_camera">100dp</dimen>
     <dimen name="margenRightLeft_card_lista_seguimiento_preview_master">10dp</dimen>
+    <dimen name="textsize_boton_buscar_citas">25sp</dimen>
+    <dimen name="textsize_link_create_user_login">17sp</dimen>
     <item name="layout_weihgt_linear_layout_imagenview_generar_cita" type="dimen" format="float">
         0.5
     </item>

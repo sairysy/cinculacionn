@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.virtualcode7ecuador.puercos.POO.cRolUser;
 import com.virtualcode7ecuador.puercos.POO.cUsuario;
 import com.virtualcode7ecuador.puercos.Runnable.cRunnableRol;
+import com.virtualcode7ecuador.puercos.Views.CreateUserLoginActivity;
 import com.virtualcode7ecuador.puercos.Views.InicioAgendadorActivity;
 import com.virtualcode7ecuador.puercos.Views.InicioMasterActivity;
 
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity
     private JsonObjectRequest jsonObjectRequest;
     private RequestQueue requestQueue;
     private ProgressDialog progressDialog;
+    private TextView textView_;
     public static final ArrayList<cRolUser>OrolUserArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,8 +53,17 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_login);
         textInputEditText_user = findViewById(R.id.textview_usuario_);
         textInputEditText_pass = findViewById(R.id.textview_password_);
+        textView_ = findViewById(R.id.text_link);
         button_login = findViewById(R.id.id_btn_login);
         linearLayoutCompat = findViewById(R.id.Linear_layout_container_datos_login);
+        textView_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent in = new Intent(LoginActivity.this, CreateUserLoginActivity.class);
+                startActivity(in);
+            }
+        });
         llenarRoles();
     }
 

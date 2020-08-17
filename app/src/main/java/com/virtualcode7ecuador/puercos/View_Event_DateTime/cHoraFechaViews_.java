@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -28,13 +31,22 @@ public class cHoraFechaViews_
     private TextInputEditText textInputEditText_hora;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
+    private int identifi;
+
     public cHoraFechaViews_(Context context1)
     {
         this.context = context1;
     }
-
     public Context getContext() {
         return context;
+    }
+
+    public int getIdentifi() {
+        return identifi;
+    }
+
+    public void setIdentifi(int identifi) {
+        this.identifi = identifi;
     }
 
     public TextInputEditText getTextInputEditText_fecha() {
@@ -102,6 +114,40 @@ public class cHoraFechaViews_
                 //Obtengo el valor a.m. o p.m., dependiendo de la selección del usuario
                 //Muestro la hora con el formato deseado
                 textInputEditText_hora.setText(horaFormateada + DOS_PUNTOS + minutoFormateado);
+            }
+        },hora,minuto,true);
+        timePickerDialog.show();
+    }
+
+    public void obtener_FechaPicker2(final TextView textView)
+    {
+        datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth)
+            {
+                final int mesActual = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                //Muestro la fecha con el formato deseado
+                textView.setText(year + BARRA + mesFormateado + BARRA + dayOfMonth);
+            }
+        },anio,mes,dia);
+        datePickerDialog.show();
+    }
+    public void obtener_TimePicker2(final TextView textView_)
+    {
+        timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute)
+            {
+                String horaFormateada =  (hourOfDay < 10)? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                //Formateo el minuto obtenido: antepone el 0 si son menores de 10
+                String minutoFormateado = (minute < 10)? String.valueOf(CERO + minute):String.valueOf(minute);
+                //Obtengo el valor a.m. o p.m., dependiendo de la selección del usuario
+                //Muestro la hora con el formato deseado
+                textView_.setText(horaFormateada + DOS_PUNTOS + minutoFormateado);
             }
         },hora,minuto,true);
         timePickerDialog.show();

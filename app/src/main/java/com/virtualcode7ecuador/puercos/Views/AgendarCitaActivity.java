@@ -1,4 +1,11 @@
-package com.virtualcode7ecuador.puercos.FragmentsAgendador;
+package com.virtualcode7ecuador.puercos.Views;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -8,35 +15,24 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.virtualcode7ecuador.puercos.FragmentsAgendador.AgendarCitaFragment;
 import com.virtualcode7ecuador.puercos.POO.cCita;
-import com.virtualcode7ecuador.puercos.POO.cEstadoCita;
 import com.virtualcode7ecuador.puercos.R;
 import com.virtualcode7ecuador.puercos.View_Event_DateTime.cHoraFechaViews_;
 import com.virtualcode7ecuador.puercos.WebServices.cCitasService;
@@ -47,13 +43,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.Context.SYSTEM_HEALTH_SERVICE;
-
-public class AgendarCitaFragment extends Fragment implements View.OnClickListener
-{
+public class AgendarCitaActivity extends AppCompatActivity implements View.OnClickListener {
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
@@ -63,7 +54,6 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     private TextInputEditText textInputEditText_actividad;
     private TextInputEditText textInputEditText_detalle_cita;
     private Uri photoURI;
-    private View view_;
     private AppCompatImageView imageView_;
     private String[] REQUIRED_PERMISSONS = new String[]{"android.permission.CAMERA"
             ,"android.permission.WRITE_EXTERNAL_STORAGE"};
@@ -71,22 +61,23 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     private cHoraFechaViews_ OcHoraFechaViews;
     private cCitasService OcitasService;
     private Button button_agendar;
+    private Button button_cancelar;
     private ProgressDialog progressDialog;
-    private boolean banfoto=false;
-    public AgendarCitaFragment()
-    {
-    }
+    private String string_img_url;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        view_ = inflater.inflate(R.layout.fragment_agendar_cita, container, false);
-        imageView_ = view_.findViewById(R.id._imagen_view_agendar_cita);
-        textInputEditText_fecha = view_.findViewById(R.id._id_fecha_cita);
-        textInputEditText_hora = view_.findViewById(R.id._id_hora_cita);
-        textInputEditText_actividad = view_.findViewById(R.id._id_actividad_cita);
-        textInputEditText_detalle_cita = view_.findViewById(R.id._id_detalle_cita);
-        button_agendar = view_.findViewById(R.id._id_btn_agendar_cita);
-        OcHoraFechaViews = new cHoraFechaViews_(getContext());
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_agendar_cita);
+        string_img_url = getIntent().getStringExtra("url_img");
+        imageView_ = findViewById(R.id._imagen_view_agendar_cita_);
+        textInputEditText_fecha = findViewById(R.id._id_fecha_cita);
+        textInputEditText_hora = findViewById(R.id._id_hora_cita);
+        textInputEditText_actividad = findViewById(R.id._id_actividad_cita);
+        textInputEditText_detalle_cita = findViewById(R.id._id_detalle_cita);
+        button_agendar = findViewById(R.id._id_btn_agendar_cita);
+        button_cancelar = findViewById(R.id._id_btn_cancelar_cita);
+        Picasso.with(this).load(string_img_url).error(R.drawable.error_image_load).into(imageView_);
+        OcHoraFechaViews = new cHoraFechaViews_(AgendarCitaActivity.this);
         OcHoraFechaViews.setDatePickerDialog(datePickerDialog);
         OcHoraFechaViews.setTimePickerDialog(timePickerDialog);
         OcHoraFechaViews.setTextInputEditText_fecha(textInputEditText_fecha);
@@ -122,11 +113,11 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
             }
         });
         button_agendar.setOnClickListener(this);
-        return view_;
+        button_cancelar.setOnClickListener(this);
     }
     @Override
     public void onResume() {
-        OcitasService = new cCitasService(getContext());
+        OcitasService = new cCitasService(this);
         imageView_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -149,7 +140,7 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
@@ -163,7 +154,7 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                 ContentValues values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "MyPicture");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "Photo taken on " + System.currentTimeMillis());
-                photoURI = getActivity().getContentResolver().insert(
+                photoURI = getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
                 //Uri photoURI = FileProvider.getUriForFile(AddActivity.this, "com.example.android.fileprovider", photoFile);
@@ -177,7 +168,7 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -195,9 +186,8 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
 
             Bitmap bitmap;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoURI);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
                 imageView_.setImageBitmap(bitmap);
-                banfoto=true;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -206,43 +196,28 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
         }
     }
     private boolean allPermissionGranted() {
-        for (String permission : REQUIRED_PERMISSONS) {
-            if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+        for (String permission : REQUIRED_PERMISSONS)
+        {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+            {
                 return false;
             }
         }
         return true;
     }
-    @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id._id_btn_agendar_cita:
-                if (verificarDatosLlenos())
-                {
-                    uploadFotoFirebase();
-                }else
-                    {
-                        Toast.makeText(getContext(), "Existen Datos Vacios...", Toast.LENGTH_SHORT).show();
-                    }
-                break;
-            case R.id._id_btn_cancelar_cita:
-                break;
-        }
-    }
+
     private boolean verificarDatosLlenos()
     {
         if (!textInputEditText_fecha.getText().toString().isEmpty()
                 &&!textInputEditText_hora.getText().toString().isEmpty()
                 &&!textInputEditText_detalle_cita.getText().toString().isEmpty()
-                &&!textInputEditText_actividad.getText().toString().isEmpty() && banfoto)
+                &&!textInputEditText_actividad.getText().toString().isEmpty())
         {
             return true;
         }else
-            {
-                return false;
-            }
+        {
+            return false;
+        }
     }
     private void uploadFotoFirebase()
     {
@@ -272,12 +247,12 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                     oC.setHora_cita(textInputEditText_hora.getText().toString());
                     oC.setActividad_cita(textInputEditText_actividad.getText().toString());
                     oC.setDetalle_cita(textInputEditText_detalle_cita.getText().toString());
-                    OcitasService.AgendarCita(oC);
+                    OcitasService.AgendarSeguimiento(oC);
                 }else
-                    {
-                        cerrarProgressDialog();
-                        Toast.makeText(getContext(), "UploadTask Null", Toast.LENGTH_SHORT).show();
-                    }
+                {
+                    cerrarProgressDialog();
+                    Toast.makeText(AgendarCitaActivity.this, "UploadTask Null", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -285,7 +260,7 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
             public void onFailure(@NonNull Exception e)
             {
                 cerrarProgressDialog();
-                Toast.makeText(getContext(), "Error Firebase : "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgendarCitaActivity.this, "Error Firebase : "+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -296,12 +271,30 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     }
     private void crearProgressDialogUploadFoto()
     {
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(AgendarCitaActivity.this);
         progressDialog.setTitle("SUBIENDO FOTO");
         progressDialog.setMessage("Por favor espere");
         progressDialog.setIcon(R.drawable.logo_firebase);
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
-}
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id._id_btn_agendar_cita:
+                if (verificarDatosLlenos())
+                {
+                    uploadFotoFirebase();
+                }else
+                {
+                    Toast.makeText(this, "Existen Datos Vacios...", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id._id_btn_cancelar_cita:
+                finish();
+                break;
+        }
+    }
+}
