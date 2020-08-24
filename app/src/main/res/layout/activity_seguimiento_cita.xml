@@ -5,68 +5,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="1"
     android:layout_height="match_parent"
     tools:context=".Views.SeguimientoCitaActivity">
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_weight="0.5"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:weightSum="1"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_weight="0.5"
-                android:id="@+id/id_imageview_cita___"
-                android:src="@drawable/salud_puercos"
-                android:scaleType="centerCrop"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.appcompat.widget.AppCompatImageView>
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_weight="0.5"
                 android:id="@+id/id_imageview_seguimiento_cita___"
                 android:src="@drawable/open_camera_open_galety"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/alto_imageview_activiti_seguimietno_cita">
             </androidx.appcompat.widget.AppCompatImageView>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_weight="0.5"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/views_datos_not_enable_agendamiento">
-        </include>
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/id_btn_falta_cita"
-                android:textStyle="bold"
-                android:text="@string/btn_falta"
-                android:textSize="@dimen/textsize_boton_login"
-                android:theme="@style/RaisedButtonRedDark"
-                android:layout_weight="0.5"
+            <include
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
-            </androidx.appcompat.widget.AppCompatButton>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/id_btn_asistido_cita"
-                android:textStyle="bold"
-                android:text="@string/btn_asistido"
-                android:textSize="@dimen/textsize_boton_login"
-                android:theme="@style/RaisedButtonDark"
-                android:layout_weight="0.5"
+                layout="@layout/views_datos_not_enable_agendamiento">
+            </include>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:weightSum="1"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
-            </androidx.appcompat.widget.AppCompatButton>
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/id_btn_falta_cita"
+                    android:textStyle="bold"
+                    android:text="@string/btn_falta"
+                    android:textSize="@dimen/textsize_boton_login"
+                    android:theme="@style/RaisedButtonRedDark"
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+                </androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/id_btn_asistido_cita"
+                    android:textStyle="bold"
+                    android:text="@string/btn_asistido"
+                    android:textSize="@dimen/textsize_boton_login"
+                    android:theme="@style/RaisedButtonDark"
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+                </androidx.appcompat.widget.AppCompatButton>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

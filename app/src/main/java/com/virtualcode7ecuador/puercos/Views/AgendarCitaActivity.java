@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
@@ -15,13 +16,14 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.virtualcode7ecuador.puercos.FragmentsAgendador.AgendarCitaFragment;
 import com.virtualcode7ecuador.puercos.POO.cCita;
 import com.virtualcode7ecuador.puercos.R;
 import com.virtualcode7ecuador.puercos.View_Event_DateTime.cHoraFechaViews_;
@@ -49,8 +50,8 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
     private TimePickerDialog timePickerDialog;
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
     private String mCurrentPhotoPath;
-    private TextInputEditText textInputEditText_fecha;
-    private TextInputEditText textInputEditText_hora;
+    private TextView textInputEditText_fecha;
+    private TextView textInputEditText_hora;
     private TextInputEditText textInputEditText_actividad;
     private TextInputEditText textInputEditText_detalle_cita;
     private Uri photoURI;
@@ -64,57 +65,61 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
     private Button button_cancelar;
     private ProgressDialog progressDialog;
     private String string_img_url;
+    private String string_doctor_;
+    private String string_actividad;
+    private TextInputEditText textInputEditText_especialidad;
+    private TextInputEditText textInputEditText_especialista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendar_cita);
+
         string_img_url = getIntent().getStringExtra("url_img");
+        string_doctor_ = getIntent().getStringExtra("doctor");
+        string_actividad = getIntent().getStringExtra("actividad");
+
         imageView_ = findViewById(R.id._imagen_view_agendar_cita_);
         textInputEditText_fecha = findViewById(R.id._id_fecha_cita);
+        textInputEditText_especialidad = findViewById(R.id._id_especialidad_cita);
+        textInputEditText_especialista = findViewById(R.id._id_especialista_cita);
         textInputEditText_hora = findViewById(R.id._id_hora_cita);
         textInputEditText_actividad = findViewById(R.id._id_actividad_cita);
         textInputEditText_detalle_cita = findViewById(R.id._id_detalle_cita);
         button_agendar = findViewById(R.id._id_btn_agendar_cita);
         button_cancelar = findViewById(R.id._id_btn_cancelar_cita);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState)
+    {
         Picasso.with(this).load(string_img_url).error(R.drawable.error_image_load).into(imageView_);
+        textInputEditText_actividad.setEnabled(false);
+        textInputEditText_especialista.setEnabled(false);
+        textInputEditText_actividad.setText(string_actividad);
+        textInputEditText_especialista.setText(string_doctor_);
         OcHoraFechaViews = new cHoraFechaViews_(AgendarCitaActivity.this);
         OcHoraFechaViews.setDatePickerDialog(datePickerDialog);
         OcHoraFechaViews.setTimePickerDialog(timePickerDialog);
         OcHoraFechaViews.setTextInputEditText_fecha(textInputEditText_fecha);
         OcHoraFechaViews.setTextInputEditText_hora(textInputEditText_hora);
-        textInputEditText_fecha.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        textInputEditText_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b)
+            public void onClick(View view)
             {
-                if (timePickerDialog!=null && timePickerDialog.isShowing())
-                {
-                    timePickerDialog.hide();
-                }
-                if (view.getId()==R.id._id_fecha_cita)
-                {
-                    textInputEditText_fecha.setInputType(InputType.TYPE_NULL);
-                    OcHoraFechaViews.obtener_FechaPicker();
-                }
+                OcHoraFechaViews.obtener_FechaPicker();
             }
         });
-        textInputEditText_hora.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        textInputEditText_hora.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b)
-            {
-                if (datePickerDialog!=null && datePickerDialog.isShowing())
-                {
-                    datePickerDialog.hide();
-                }
-                if (view.getId()==R.id._id_hora_cita)
-                {
-                    textInputEditText_hora.setInputType(InputType.TYPE_NULL);
-                    OcHoraFechaViews.obtener_TimePicker();
-                }
+            public void onClick(View view) {
+                OcHoraFechaViews.obtener_TimePicker();
             }
         });
         button_agendar.setOnClickListener(this);
         button_cancelar.setOnClickListener(this);
+        super.onPostCreate(savedInstanceState);
     }
+
     @Override
     public void onResume() {
         OcitasService = new cCitasService(this);
@@ -122,7 +127,7 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View view)
             {
-                /*if (allPermissionGranted()) {
+                if (allPermissionGranted()) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         //tomarFoto24();
                         dispatchTakePictureIntent();
@@ -131,8 +136,8 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
                         //dispatchTakePictureIntent();
                     }
                 } else {
-                    ActivityCompat.requestPermissions(getActivity(), REQUIRED_PERMISSONS, REQUEST_CODE_PERMISSIONS);
-                }*/
+                    ActivityCompat.requestPermissions(AgendarCitaActivity.this, REQUIRED_PERMISSONS, REQUEST_CODE_PERMISSIONS);
+                }
             }
         });
         super.onResume();
@@ -211,7 +216,9 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
         if (!textInputEditText_fecha.getText().toString().isEmpty()
                 &&!textInputEditText_hora.getText().toString().isEmpty()
                 &&!textInputEditText_detalle_cita.getText().toString().isEmpty()
-                &&!textInputEditText_actividad.getText().toString().isEmpty())
+                &&!textInputEditText_actividad.getText().toString().isEmpty()
+                &&!textInputEditText_especialidad.getText().toString().isEmpty()
+                &&!textInputEditText_especialista.getText().toString().isEmpty())
         {
             return true;
         }else
@@ -247,6 +254,8 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
                     oC.setHora_cita(textInputEditText_hora.getText().toString());
                     oC.setActividad_cita(textInputEditText_actividad.getText().toString());
                     oC.setDetalle_cita(textInputEditText_detalle_cita.getText().toString());
+                    oC.setDoctor(textInputEditText_especialista.getText().toString());
+                    oC.setEspecialidad_(textInputEditText_especialidad.getText().toString());
                     OcitasService.AgendarSeguimiento(oC);
                 }else
                 {

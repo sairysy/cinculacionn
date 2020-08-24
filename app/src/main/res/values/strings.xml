@@ -24,7 +24,7 @@
     <string name="url_insert_cita">http://www.vigitrackecuador.com/services_unach/crud_citas/create.php</string>
     <string name="btn_guardar_user">GUARDAR</string>
     <string name="url_select_roles">http://www.vigitrackecuador.com/services_unach/rol/read.php</string>
-    <string name="btn_buscar_reportes">BUSCAR CITAS</string>
+    <string name="btn_buscar_reportes">PUBLICACION ACTIVIDAD</string>
     <string name="url_read_citas">http://www.vigitrackecuador.com/services_unach/crud_citas/read.php</string>
     <string name="btn_asistido">ASISTIDO</string>
     <string name="btn_falta">FALTA</string>
@@ -35,4 +35,11 @@
     <string name="url_update_estado_seguimiento">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/update.php</string>
     <string name="url_insert_seguimiento">http://www.vigitrackecuador.com/services_unach/crud_seguimiento/create.php</string>
     <string name="text_registrar_agendador_login">Desea registrarse, aqui</string>
+    <string name="hint_fecha_">  yyyy-mm-dd</string>
+    <string name="hint_hora_">HH:mm</string>
+    <string name="hint_tipo_especialidad">INGRESE LA ESPECIALIDAD</string>
+    <string name="hint_especialista">INGRESE EL ESPECIALISTA</string>
+    <string name="subir_cita_publicar">PUBLICAR</string>
+    <string name="generar_lista">GENERAR LISTA</string>
+    <string name="url_read_reportG">http://www.vigitrackecuador.com/services_unach/reportG/report.php</string>
 </resources>

@@ -16,9 +16,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.virtualcode7ecuador.puercos.FragmentMaster.CreateUserFragment;
-import com.virtualcode7ecuador.puercos.FragmentMaster.FragmentReport.ReportSeguimientoFragment;
-import com.virtualcode7ecuador.puercos.FragmentsAgendador.AgendarCitaFragment;
+import com.virtualcode7ecuador.puercos.Fragment.CreateUserFragment;
+import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.ReportSeguimientoFragment;
+import com.virtualcode7ecuador.puercos.Fragment.AgendarCitaFragment;
+import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.ReporteGFragment;
 import com.virtualcode7ecuador.puercos.LoginActivity;
 import com.virtualcode7ecuador.puercos.R;
 
@@ -33,6 +34,7 @@ public class InicioMasterActivity extends AppCompatActivity
     private ReportSeguimientoFragment OreportSeguimientoFragment;
     private CreateUserFragment OcreateUserFragment;
     private AgendarCitaFragment OagendarCitaFragment;
+    private ReporteGFragment OreporteGFragment;
     private AlertDialog alertDialog;
 
     @Override
@@ -44,6 +46,7 @@ public class InicioMasterActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar_);
         configurarToolbarHamborguer();
         fragmentManager = getSupportFragmentManager();
+        OreporteGFragment = new ReporteGFragment();
         OreportSeguimientoFragment = new ReportSeguimientoFragment();
         OcreateUserFragment = new CreateUserFragment();
         OagendarCitaFragment = new AgendarCitaFragment();
@@ -76,6 +79,12 @@ public class InicioMasterActivity extends AppCompatActivity
                     case R.id.id_subir_master:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container_master
                                 ,OagendarCitaFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                        break;
+                    case R.id.id_reporte_master:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container_master
+                                ,OreporteGFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
                         break;

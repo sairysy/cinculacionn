@@ -2,6 +2,7 @@ package com.virtualcode7ecuador.puercos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.virtualcode7ecuador.puercos.POO.cCita;
 import com.virtualcode7ecuador.puercos.POO.cRolUser;
 import com.virtualcode7ecuador.puercos.POO.cUsuario;
 import com.virtualcode7ecuador.puercos.Runnable.cRunnableRol;
@@ -45,6 +47,8 @@ public class LoginActivity extends AppCompatActivity
     private RequestQueue requestQueue;
     private ProgressDialog progressDialog;
     private TextView textView_;
+    public static final ArrayList<cCita> arrayList = new ArrayList<>();
+    public static  RecyclerView recyclerView=null;
     public static final ArrayList<cRolUser>OrolUserArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)

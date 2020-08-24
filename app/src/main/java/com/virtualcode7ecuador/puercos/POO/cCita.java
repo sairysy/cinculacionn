@@ -13,8 +13,26 @@ public class cCita
     private String actividad_cita;
     private String detalle_cita;
     private cEstadoCita OestadoCita;
+    private String doctor;
+    private String especialidad_;
 
     public cCita(){}
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getEspecialidad_() {
+        return especialidad_;
+    }
+
+    public void setEspecialidad_(String especialidad_) {
+        this.especialidad_ = especialidad_;
+    }
 
     public int getId_Cita() {
         return id_Cita;

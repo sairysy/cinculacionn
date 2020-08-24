@@ -1,8 +1,10 @@
-package com.virtualcode7ecuador.puercos.FragmentsAgendador;
+package com.virtualcode7ecuador.puercos.Fragment;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,26 +19,27 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.ReportSeguimientoFragment;
 import com.virtualcode7ecuador.puercos.POO.cCita;
-import com.virtualcode7ecuador.puercos.POO.cEstadoCita;
 import com.virtualcode7ecuador.puercos.R;
 import com.virtualcode7ecuador.puercos.View_Event_DateTime.cHoraFechaViews_;
 import com.virtualcode7ecuador.puercos.WebServices.cCitasService;
@@ -47,32 +50,36 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.SYSTEM_HEALTH_SERVICE;
 
 public class AgendarCitaFragment extends Fragment implements View.OnClickListener
 {
+    private static final int PICK_IMAGE = 565;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
     private String mCurrentPhotoPath;
-    private TextInputEditText textInputEditText_fecha;
-    private TextInputEditText textInputEditText_hora;
+    private TextView textInputEditText_fecha;
+    private TextView textInputEditText_hora;
     private TextInputEditText textInputEditText_actividad;
     private TextInputEditText textInputEditText_detalle_cita;
+    private TextInputEditText textInputEditText_especialidad;
+    private TextInputEditText textInputEditText_especialista;
     private Uri photoURI;
     private View view_;
     private AppCompatImageView imageView_;
     private String[] REQUIRED_PERMISSONS = new String[]{"android.permission.CAMERA"
-            ,"android.permission.WRITE_EXTERNAL_STORAGE"};
+            ,"android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE"};
     private int REQUEST_CODE_PERMISSIONS = 101;
     private cHoraFechaViews_ OcHoraFechaViews;
     private cCitasService OcitasService;
     private Button button_agendar;
+    private Button button_cancelar;
     private ProgressDialog progressDialog;
     private boolean banfoto=false;
+    private AlertDialog alertDialog;
+
     public AgendarCitaFragment()
     {
     }
@@ -81,47 +88,34 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     {
         view_ = inflater.inflate(R.layout.fragment_agendar_cita, container, false);
         imageView_ = view_.findViewById(R.id._imagen_view_agendar_cita);
+        textInputEditText_especialidad = view_.findViewById(R.id._id_especialidad_cita);
+        textInputEditText_especialista = view_.findViewById(R.id._id_especialista_cita);
         textInputEditText_fecha = view_.findViewById(R.id._id_fecha_cita);
         textInputEditText_hora = view_.findViewById(R.id._id_hora_cita);
         textInputEditText_actividad = view_.findViewById(R.id._id_actividad_cita);
         textInputEditText_detalle_cita = view_.findViewById(R.id._id_detalle_cita);
+        button_cancelar = view_.findViewById(R.id._id_btn_cancelar_cita);
         button_agendar = view_.findViewById(R.id._id_btn_agendar_cita);
         OcHoraFechaViews = new cHoraFechaViews_(getContext());
         OcHoraFechaViews.setDatePickerDialog(datePickerDialog);
         OcHoraFechaViews.setTimePickerDialog(timePickerDialog);
         OcHoraFechaViews.setTextInputEditText_fecha(textInputEditText_fecha);
         OcHoraFechaViews.setTextInputEditText_hora(textInputEditText_hora);
-        textInputEditText_fecha.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b)
-            {
-                if (timePickerDialog!=null && timePickerDialog.isShowing())
-                {
-                    timePickerDialog.hide();
-                }
-                if (view.getId()==R.id._id_fecha_cita)
-                {
-                    textInputEditText_fecha.setInputType(InputType.TYPE_NULL);
-                    OcHoraFechaViews.obtener_FechaPicker();
-                }
-            }
-        });
-        textInputEditText_hora.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b)
-            {
-                if (datePickerDialog!=null && datePickerDialog.isShowing())
-                {
-                    datePickerDialog.hide();
-                }
-                if (view.getId()==R.id._id_hora_cita)
-                {
-                    textInputEditText_hora.setInputType(InputType.TYPE_NULL);
-                    OcHoraFechaViews.obtener_TimePicker();
-                }
-            }
-        });
         button_agendar.setOnClickListener(this);
+        textInputEditText_fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                OcHoraFechaViews.obtener_FechaPicker();
+            }
+        });
+        textInputEditText_hora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OcHoraFechaViews.obtener_TimePicker();
+            }
+        });
+        button_cancelar.setOnClickListener(this);
         return view_;
     }
     @Override
@@ -131,17 +125,36 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(View view)
             {
-                /*if (allPermissionGranted()) {
+                if (allPermissionGranted()) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         //tomarFoto24();
-                        dispatchTakePictureIntent();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Escoga una Opcion");
+                        builder.setPositiveButton("Camara", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                dispatchTakePictureIntent();
+                            }
+                        });
+                        builder.setNegativeButton("Galeria", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                                startActivityForResult(intent,PICK_IMAGE);
+                            }
+                        });
+                        alertDialog = builder.create();
+                        alertDialog.show();
                     } else {
                         //tomarFoto();
                         //dispatchTakePictureIntent();
                     }
                 } else {
                     ActivityCompat.requestPermissions(getActivity(), REQUIRED_PERMISSONS, REQUEST_CODE_PERMISSIONS);
-                }*/
+                }
             }
         });
         super.onResume();
@@ -204,6 +217,11 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                 e.printStackTrace();
             }
         }
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) 
+        {
+            Picasso.with(getContext()).load(data.getData()).error(R.drawable.error_image_load).into(imageView_);
+            banfoto=true;
+        }
     }
     private boolean allPermissionGranted() {
         for (String permission : REQUIRED_PERMISSONS) {
@@ -228,6 +246,10 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                     }
                 break;
             case R.id._id_btn_cancelar_cita:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_master,new ReportSeguimientoFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null).commit();
                 break;
         }
     }
@@ -236,7 +258,10 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
         if (!textInputEditText_fecha.getText().toString().isEmpty()
                 &&!textInputEditText_hora.getText().toString().isEmpty()
                 &&!textInputEditText_detalle_cita.getText().toString().isEmpty()
-                &&!textInputEditText_actividad.getText().toString().isEmpty() && banfoto)
+                &&!textInputEditText_actividad.getText().toString().isEmpty()
+                && !textInputEditText_especialidad.getText().toString().isEmpty()
+                && !textInputEditText_especialista.getText().toString().isEmpty()
+                && banfoto)
         {
             return true;
         }else
@@ -272,6 +297,13 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                     oC.setHora_cita(textInputEditText_hora.getText().toString());
                     oC.setActividad_cita(textInputEditText_actividad.getText().toString());
                     oC.setDetalle_cita(textInputEditText_detalle_cita.getText().toString());
+                    oC.setDoctor(textInputEditText_especialista.getText().toString());
+                    oC.setEspecialidad_(textInputEditText_especialidad.getText().toString());
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_master,new ReportSeguimientoFragment())
+                            .addToBackStack(null)
+                            .commit();
                     OcitasService.AgendarCita(oC);
                 }else
                     {

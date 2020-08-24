@@ -16,8 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.virtualcode7ecuador.puercos.FragmentMaster.FragmentReport.ReportSeguimientoFragment;
-import com.virtualcode7ecuador.puercos.FragmentsAgendador.AgendarCitaFragment;
+import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.ReportSeguimientoFragment;
+import com.virtualcode7ecuador.puercos.Fragment.AgendarCitaFragment;
 import com.virtualcode7ecuador.puercos.LoginActivity;
 import com.virtualcode7ecuador.puercos.R;
 

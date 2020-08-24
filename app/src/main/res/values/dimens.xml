@@ -12,6 +12,13 @@
     <dimen name="margenRightLeft_card_lista_seguimiento_preview_master">10dp</dimen>
     <dimen name="textsize_boton_buscar_citas">25sp</dimen>
     <dimen name="textsize_link_create_user_login">17sp</dimen>
+    <dimen name="dimen_alto_img_view_preview_foto">250dp</dimen>
+    <dimen name="alto_imageview_activiti_seguimietno_cita">250dp</dimen>
+    <dimen name="textsize_20sp_report_G">20sp</dimen>
+    <dimen name="textsize_30sp_report_G">30sp</dimen>
+    <dimen name="textsize_25sp_report_G">25sp</dimen>
+    <dimen name="textsize_18sp_report_G">18sp</dimen>
+    <dimen name="textsize_actividad_ReportG">25sp</dimen>
     <item name="layout_weihgt_linear_layout_imagenview_generar_cita" type="dimen" format="float">
         0.5
     </item>

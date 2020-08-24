@@ -27,8 +27,8 @@ public class cHoraFechaViews_
     //Variables para obtener la hora hora
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
-    private TextInputEditText textInputEditText_fecha;
-    private TextInputEditText textInputEditText_hora;
+    private TextView textInputEditText_fecha;
+    private TextView textInputEditText_hora;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     private int identifi;
@@ -49,19 +49,19 @@ public class cHoraFechaViews_
         this.identifi = identifi;
     }
 
-    public TextInputEditText getTextInputEditText_fecha() {
+    public TextView getTextInputEditText_fecha() {
         return textInputEditText_fecha;
     }
 
-    public void setTextInputEditText_fecha(TextInputEditText textInputEditText_fecha) {
+    public void setTextInputEditText_fecha(TextView textInputEditText_fecha) {
         this.textInputEditText_fecha = textInputEditText_fecha;
     }
 
-    public TextInputEditText getTextInputEditText_hora() {
+    public TextView getTextInputEditText_hora() {
         return textInputEditText_hora;
     }
 
-    public void setTextInputEditText_hora(TextInputEditText textInputEditText_hora) {
+    public void setTextInputEditText_hora(TextView textInputEditText_hora) {
         this.textInputEditText_hora = textInputEditText_hora;
     }
 

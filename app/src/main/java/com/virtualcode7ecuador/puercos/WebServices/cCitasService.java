@@ -33,6 +33,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.virtualcode7ecuador.puercos.LoginActivity.Ousuario;
+import static com.virtualcode7ecuador.puercos.LoginActivity.arrayList;
+import static com.virtualcode7ecuador.puercos.LoginActivity.recyclerView;
 
 public class cCitasService implements Serializable
 {
@@ -40,7 +42,6 @@ public class cCitasService implements Serializable
     private JsonObjectRequest jsonObjectRequest;
     private RequestQueue requestQueue;
     private ProgressDialog progressDialog;
-    private ArrayList<cCita>arrayList;
     private int Result_activity_seguimiento=120;
     public cCitasService(Context c)
     {
@@ -56,7 +57,7 @@ public class cCitasService implements Serializable
                 "&url_foto_cita_seg="+Ocita.getUrl_foto_seguimi()+
                 "&fecha_cita="+Ocita.getFecha_cita()+"&hora_cita="+Ocita.getHora_cita()+
                 "&actividad_cita="+Ocita.getActividad_cita()+"&detalle_cita="+Ocita.getDetalle_cita()+
-                "&id_estado_cita=3";
+                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_();
         Log.e("URLCREATECITA",url_);
         jsonObjectRequest = new JsonObjectRequest(url_
                 , null, new Response.Listener<JSONObject>()
@@ -91,7 +92,7 @@ public class cCitasService implements Serializable
         requestQueue = Volley.newRequestQueue(getContext_());
         requestQueue.add(jsonObjectRequest);
     }
-    public void AgendarSeguimiento(cCita Ocita)
+    public void AgendarSeguimiento(cCita Ocita  )
     {
         abrirProgressDialog("GUARDANDO","Porfavor espere...");
         String url_ = getContext_()
@@ -99,7 +100,7 @@ public class cCitasService implements Serializable
                 "&url_foto_cita_seg="+Ocita.getUrl_foto_seguimi()+
                 "&fecha_cita="+Ocita.getFecha_cita()+"&hora_cita="+Ocita.getHora_cita()+
                 "&actividad_cita="+Ocita.getActividad_cita()+"&detalle_cita="+Ocita.getDetalle_cita()+
-                "&id_estado_cita=3";
+                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_();
         Log.e("URLCREATECITA",url_);
         jsonObjectRequest = new JsonObjectRequest(url_
                 , null, new Response.Listener<JSONObject>()
@@ -177,10 +178,10 @@ public class cCitasService implements Serializable
         progressDialog.show();
     }
     public void readCitas(int tipo_cita, String fecha_ini, String fecha_fin, String hora_ini
-            , String hora_fin, final RecyclerView recyclerView)
+            , String hora_fin)
     {
+        abrirProgressDialog("SEGUIMIENTO","Porfavor espere...");
         String url_="";
-        final ArrayList<cCita> arrayList = new ArrayList<>();
         if(Ousuario.getId_rol_usuario()!=2)
         {
             url_ = getContext_().getString(R.string.url_read_seguimiento)+"?estado_cita="+tipo_cita+"&fecha_inicial="
@@ -200,6 +201,7 @@ public class cCitasService implements Serializable
                     if (response.getString("status").equals("ok"))
                     {
                         JSONArray  jsonArray = response.getJSONArray("datos");
+                        if (arrayList!=null && arrayList.size()>0){arrayList.clear();}
                         for (int ih=0;ih<jsonArray.length();ih++)
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(ih);
@@ -211,6 +213,8 @@ public class cCitasService implements Serializable
                             Oc.setFecha_cita(jsonObject.getString("fecha_cita"));
                             Oc.setHora_cita(jsonObject.getString("hora_cita"));
                             Oc.setId_Cita(jsonObject.getInt("pk_auto_citas"));
+                            Oc.setDoctor(jsonObject.getString("doctor"));
+                            Oc.setEspecialidad_(jsonObject.getString("departamento"));
                             arrayList.add(Oc);
                         }
                         final cAdapterCitas Oda;
@@ -228,7 +232,7 @@ public class cCitasService implements Serializable
                                     public void onClick(View view)
                                     {
                                         cCita Oc =  arrayList.get(recyclerView.getChildAdapterPosition(view));
-                                        Toast.makeText(context_, "c", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(context_, "c", Toast.LENGTH_SHORT).show();
                                         if(Ousuario.getId_rol_usuario()==2)
                                         {
                                             abrirActivityAgendar(Oc);
@@ -243,11 +247,14 @@ public class cCitasService implements Serializable
                         recyclerView.setLayoutManager(linearLayoutManager);
                         Oda.notifyDataSetChanged();
                         recyclerView.setAdapter(Oda);
+                        cerrarProgresDialog();
                     }else
                         {
+                            cerrarProgresDialog();
                             Toast.makeText(getContext_(), "DATOS VACIOS..", Toast.LENGTH_SHORT).show();
                         }
                 } catch (JSONException e) {
+                    cerrarProgresDialog();
                     Toast.makeText(getContext_(), "TRYCATH ERROR: "+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -255,7 +262,8 @@ public class cCitasService implements Serializable
             @Override
             public void onErrorResponse(VolleyError error)
             {
-
+                Toast.makeText(context_, "VOLLEY ERROR : "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                cerrarProgresDialog();
             }
         });
         requestQueue = Volley.newRequestQueue(getContext_());
@@ -267,6 +275,8 @@ public class cCitasService implements Serializable
         Intent intent = new Intent(getContext_(), AgendarCitaActivity.class);
         intent.putExtra("url_img",oc.getUrl_foto_cita());
         intent.putExtra("id_key",oc.getId_Cita());
+        intent.putExtra("doctor",oc.getDoctor());
+        intent.putExtra("actividad",oc.getActividad_cita());
         getContext_().startActivity(intent);
     }
 
@@ -323,6 +333,8 @@ public class cCitasService implements Serializable
         intent.putExtra("detalle",oc.getDetalle_cita());
         intent.putExtra("fecha",oc.getFecha_cita());
         intent.putExtra("hora",oc.getHora_cita());
+        intent.putExtra("departamento",oc.getEspecialidad_());
+        intent.putExtra("doctor",oc.getDoctor());
         getContext_().startActivity(intent);
     }
     public void deleteObjRecycler(int id)
@@ -336,6 +348,28 @@ public class cCitasService implements Serializable
                     arrayList.remove(i);
                 }
             }
+            cAdapterCitas Oda= new cAdapterCitas(Ousuario.getId_rol_usuario(),
+                    R.layout.card_views_lista_seguimiento_preview_master,
+                    getContext_(), arrayList, new View.OnClickListener() {
+                @Override
+                public void onClick(View view)
+                {
+                    cCita Oc =  arrayList.get(recyclerView.getChildAdapterPosition(view));
+                    //Toast.makeText(context_, "c", Toast.LENGTH_SHORT).show();
+                    if(Ousuario.getId_rol_usuario()==2)
+                    {
+                        abrirActivityAgendar(Oc);
+                    }else
+                    {
+                        abrirActivitySeguimiento(Oc);
+                    }
+                }
+            });
+            //}
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext_());
+            recyclerView.setLayoutManager(linearLayoutManager);
+            Oda.notifyDataSetChanged();
+            recyclerView.setAdapter(Oda);
         }
     }
 }

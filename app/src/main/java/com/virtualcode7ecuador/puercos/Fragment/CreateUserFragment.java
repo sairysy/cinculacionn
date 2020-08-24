@@ -1,4 +1,4 @@
-package com.virtualcode7ecuador.puercos.FragmentMaster;
+package com.virtualcode7ecuador.puercos.Fragment;
 
 import android.os.Bundle;
 

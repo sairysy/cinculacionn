@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
-    android:weightSum="1"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,10 +8,9 @@
     android:layout_height="match_parent"
     tools:context=".Views.AgendarCitaActivity">
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_weight="@dimen/layout_weihgt_linear_layout_imagenview_generar_cita"
         android:background="@color/colorSecondaryText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="250dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/_imagen_view_agendar_cita_"
             android:scaleType="centerCrop"
@@ -21,14 +19,21 @@
             android:layout_height="match_parent">
         </androidx.appcompat.widget.AppCompatImageView>
     </androidx.appcompat.widget.LinearLayoutCompat>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_margin="25dp"
-        android:orientation="vertical"
-        android:layout_weight="@dimen/layout_weihgt_linear_layout_contenedor_datos_generar_cita"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            layout="@layout/views_datos_agendamiento">
-        </include>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_margin="25dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include
+                    layout="@layout/views_datos_agendamiento">
+                </include>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

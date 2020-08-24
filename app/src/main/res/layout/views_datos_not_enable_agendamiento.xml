@@ -40,6 +40,28 @@
         android:layout_height="?actionBarSize">
     </TextView>
     <TextView
+        android:id="@+id/id_textview_doctor_inicio___"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:textSize="@dimen/textsize_boton_login"
+        android:gravity="center"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:drawableStart="@drawable/doctor_"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+    </TextView>
+    <TextView
+        android:id="@+id/id_textview_departamento_inicio___"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:textSize="@dimen/textsize_boton_login"
+        android:gravity="center"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:drawableStart="@drawable/departament_"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+    </TextView>
+    <TextView
         android:id="@+id/id_textview_detalle_inicio___"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"

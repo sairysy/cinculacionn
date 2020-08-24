@@ -1,11 +1,10 @@
-package com.virtualcode7ecuador.puercos.FragmentMaster.FragmentReport;
+package com.virtualcode7ecuador.puercos.Fragment.FragmentReport;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,13 +18,11 @@ import com.virtualcode7ecuador.puercos.R;
 import com.virtualcode7ecuador.puercos.View_Event_DateTime.cHoraFechaViews_;
 import com.virtualcode7ecuador.puercos.WebServices.cCitasService;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 import static android.app.Activity.RESULT_OK;
-
+import  static com.virtualcode7ecuador.puercos.LoginActivity.recyclerView;
 public class ReportSeguimientoFragment extends Fragment implements View.OnClickListener
 {
     private static final String CERO = "0";
@@ -38,7 +35,6 @@ public class ReportSeguimientoFragment extends Fragment implements View.OnClickL
     private TextView textView_hora_fin;
     private Button button_buscar;
     private cHoraFechaViews_ OhoraFechaViews_;
-    private RecyclerView recyclerView;
     int Result_activity_seguimiento=120;
     public ReportSeguimientoFragment() { }
     @Override
@@ -63,7 +59,7 @@ public class ReportSeguimientoFragment extends Fragment implements View.OnClickL
                 OcitasService.readCitas(3,textView_fecha_inicio.getText().toString()
                         ,textView_fecha_fin.getText().toString()
                         ,textView_hora_inicio.getText().toString()
-                        ,textView_hora_fin.getText().toString(),recyclerView);
+                        ,textView_hora_fin.getText().toString());
             }
         });
         return view_;
@@ -73,7 +69,7 @@ public class ReportSeguimientoFragment extends Fragment implements View.OnClickL
     {
         obtenerfechaActual();
         OcitasService.readCitas(3,textView_fecha_inicio.getText().toString()
-                ,textView_fecha_fin.getText().toString(),"07:00:00","20:00:00",recyclerView);
+                ,textView_fecha_fin.getText().toString(),"05:00:00","20:00:00");
     }
     private void obtenerfechaActual()
     {
