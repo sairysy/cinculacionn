@@ -15,8 +15,46 @@ public class cCita
     private cEstadoCita OestadoCita;
     private String doctor;
     private String especialidad_;
+    private String zona;
+    private String provincia;
+    private String distrito;
+    private String unidad;
+
 
     public cCita(){}
+
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
 
     public String getDoctor() {
         return doctor;

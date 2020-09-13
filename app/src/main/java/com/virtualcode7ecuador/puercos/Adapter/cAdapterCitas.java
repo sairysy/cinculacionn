@@ -74,6 +74,19 @@ public class cAdapterCitas extends RecyclerView.Adapter<cAdapterCitas.cViewHolde
                     intent.putExtra("id_key",OcitaArrayList.get(position).getId_Cita());
                     intent.putExtra("doctor",OcitaArrayList.get(position).getDoctor());
                     intent.putExtra("actividad",OcitaArrayList.get(position).getActividad_cita());
+
+                    intent.putExtra("zona",OcitaArrayList.get(position).getZona());
+                    intent.putExtra("provincia",OcitaArrayList.get(position).getProvincia());
+                    intent.putExtra("distrito",OcitaArrayList.get(position).getDistrito());
+                    intent.putExtra("unidad",String.valueOf(OcitaArrayList.get(position).getUnidad()));
+
+                    intent.putExtra("fecha",OcitaArrayList.get(position).getFecha_cita());
+                    intent.putExtra("hora",OcitaArrayList.get(position).getHora_cita());
+                    intent.putExtra("especialidad",OcitaArrayList.get(position).getEspecialidad_());
+                    intent.putExtra("detalle",OcitaArrayList.get(position).getDetalle_cita());
+
+
+
                     context.startActivity(intent);
                 }else
                 {
@@ -86,6 +99,10 @@ public class cAdapterCitas extends RecyclerView.Adapter<cAdapterCitas.cViewHolde
                     intent.putExtra("hora",OcitaArrayList.get(position).getHora_cita());
                     intent.putExtra("departamento",OcitaArrayList.get(position).getEspecialidad_());
                     intent.putExtra("doctor",OcitaArrayList.get(position).getDoctor());
+                    intent.putExtra("zona",OcitaArrayList.get(position).getZona());
+                    intent.putExtra("provincia",OcitaArrayList.get(position).getProvincia());
+                    intent.putExtra("distrito",OcitaArrayList.get(position).getDistrito());
+                    intent.putExtra("unidad",String.valueOf(OcitaArrayList.get(position).getUnidad()));
                     context.startActivity(intent);
                 }
             }

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.MisAgendacionesFragment;
 import com.virtualcode7ecuador.puercos.Fragment.FragmentReport.ReportSeguimientoFragment;
 import com.virtualcode7ecuador.puercos.Fragment.AgendarCitaFragment;
 import com.virtualcode7ecuador.puercos.LoginActivity;
@@ -53,6 +54,11 @@ public class InicioAgendadorActivity extends AppCompatActivity
                 {
                     case R.id.id_subir_cita:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,OreportSeguimientoFragment)
+                                .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commit();
+                        break;
+                    case R.id.id_read_mis_cita:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,new MisAgendacionesFragment())
                                 .addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                         break;

@@ -42,4 +42,11 @@
     <string name="subir_cita_publicar">PUBLICAR</string>
     <string name="generar_lista">GENERAR LISTA</string>
     <string name="url_read_reportG">http://www.vigitrackecuador.com/services_unach/reportG/report.php</string>
+    <string name="hint_cedula">INGRESE EL NUMERO DE CEDULA</string>
+    <string name="hint_datos">INGRESE SUS NOMBRES</string>
+    <string name="hint_telefono">INGRESE SU TELEFONO</string>
+    <string name="mis_citas">MI AGENDA</string>
+
+    <string name="url_mis_citas">http://www.vigitrackecuador.com/services_unach/crud_mis_citas/read.php</string>
+
 </resources>

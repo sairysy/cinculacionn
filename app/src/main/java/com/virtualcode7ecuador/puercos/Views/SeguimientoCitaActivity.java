@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -74,6 +75,17 @@ public class SeguimientoCitaActivity extends AppCompatActivity implements View.O
     private String[] REQUIRED_PERMISSONS = new String[]{"android.permission.CAMERA"
             ,"android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE"};
     private int REQUEST_CODE_PERMISSIONS = 101;
+
+    private String zona;
+    private String provincia;
+    private String distrito;
+    private String unidad;
+
+    private TextInputEditText mTextInputEditTextZona;
+    private TextInputEditText mTextInputEditTextProvincia;
+    private TextInputEditText mTextInputEditTextDistrito;
+    private TextInputEditText mTextInputEditTextUnidad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -90,6 +102,13 @@ public class SeguimientoCitaActivity extends AppCompatActivity implements View.O
         textView_departamento =  findViewById(R.id.id_textview_departamento_inicio___);
         btn_asistido = findViewById(R.id.id_btn_falta_cita);
         btn_no_asistido = findViewById(R.id.id_btn_asistido_cita);
+
+        mTextInputEditTextZona = findViewById(R.id.id_edittext_zona);
+        mTextInputEditTextProvincia = findViewById(R.id.id_edittext_provincia);
+        mTextInputEditTextDistrito = findViewById(R.id.id_editext_distrito);
+        mTextInputEditTextUnidad = findViewById(R.id.id_edittext_unidad);
+
+
         OcitasService = new cCitasService(SeguimientoCitaActivity.this);
         //Picasso.with(SeguimientoCitaActivity.this).load(string_url_foto).error(R.drawable.error_image_load).into(imageView_cita);
         btn_asistido.setOnClickListener(this);
@@ -107,6 +126,10 @@ public class SeguimientoCitaActivity extends AppCompatActivity implements View.O
         string_actividad=getIntent().getStringExtra("actividad");
         string_doctor=getIntent().getStringExtra("doctor");
         string_departamento=getIntent().getStringExtra("departamento");
+        zona = getIntent().getStringExtra("zona");
+        provincia = getIntent().getStringExtra("provincia");
+        distrito = getIntent().getStringExtra("distrito");
+        unidad = getIntent().getStringExtra("unidad");
     }
     private void llenarTextViewCitas()
     {
@@ -116,6 +139,11 @@ public class SeguimientoCitaActivity extends AppCompatActivity implements View.O
         textView_activida.setText(string_actividad);
         textView_doctor.setText(string_doctor);
         textView_departamento.setText(string_departamento);
+
+        mTextInputEditTextDistrito.setText(distrito);
+        mTextInputEditTextProvincia.setText(provincia);
+        mTextInputEditTextZona.setText(zona);
+        mTextInputEditTextUnidad.setText(unidad);
     }
     @Override
     public void onClick(View view)

@@ -57,7 +57,9 @@ public class cCitasService implements Serializable
                 "&url_foto_cita_seg="+Ocita.getUrl_foto_seguimi()+
                 "&fecha_cita="+Ocita.getFecha_cita()+"&hora_cita="+Ocita.getHora_cita()+
                 "&actividad_cita="+Ocita.getActividad_cita()+"&detalle_cita="+Ocita.getDetalle_cita()+
-                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_();
+                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_()+
+                "&zona="+Ocita.getZona()+"&provincia="+Ocita.getProvincia()+"&distrito="+Ocita.getDistrito()+
+                "&unidad="+Ocita.getUnidad();
         Log.e("URLCREATECITA",url_);
         jsonObjectRequest = new JsonObjectRequest(url_
                 , null, new Response.Listener<JSONObject>()
@@ -92,7 +94,7 @@ public class cCitasService implements Serializable
         requestQueue = Volley.newRequestQueue(getContext_());
         requestQueue.add(jsonObjectRequest);
     }
-    public void AgendarSeguimiento(cCita Ocita  )
+    public void AgendarSeguimiento(cCita Ocita,String id_user)
     {
         abrirProgressDialog("GUARDANDO","Porfavor espere...");
         String url_ = getContext_()
@@ -100,8 +102,10 @@ public class cCitasService implements Serializable
                 "&url_foto_cita_seg="+Ocita.getUrl_foto_seguimi()+
                 "&fecha_cita="+Ocita.getFecha_cita()+"&hora_cita="+Ocita.getHora_cita()+
                 "&actividad_cita="+Ocita.getActividad_cita()+"&detalle_cita="+Ocita.getDetalle_cita()+
-                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_();
-        Log.e("URLCREATECITA",url_);
+                "&id_estado_cita=3&doctor="+Ocita.getDoctor()+"&especialidad="+Ocita.getEspecialidad_()+
+                "&zona="+Ocita.getZona()+"&provincia="+Ocita.getProvincia()+"&distrito="+Ocita.getDistrito()+
+                "&unidad="+Ocita.getUnidad()+"&id_user="+id_user;
+        Log.e("URLCREATESEGUIMIENTO",url_);
         jsonObjectRequest = new JsonObjectRequest(url_
                 , null, new Response.Listener<JSONObject>()
         {
@@ -215,6 +219,12 @@ public class cCitasService implements Serializable
                             Oc.setId_Cita(jsonObject.getInt("pk_auto_citas"));
                             Oc.setDoctor(jsonObject.getString("doctor"));
                             Oc.setEspecialidad_(jsonObject.getString("departamento"));
+                            Oc.setZona(jsonObject.getString("zona"));
+                            Oc.setProvincia(jsonObject.getString("provincia"));
+                            Oc.setDistrito(jsonObject.getString("distrito"));
+                            Oc.setUnidad(String.valueOf(jsonObject.getString("unidad")));
+
+
                             arrayList.add(Oc);
                         }
                         final cAdapterCitas Oda;
@@ -277,6 +287,14 @@ public class cCitasService implements Serializable
         intent.putExtra("id_key",oc.getId_Cita());
         intent.putExtra("doctor",oc.getDoctor());
         intent.putExtra("actividad",oc.getActividad_cita());
+        intent.putExtra("zona",oc.getDoctor());
+        intent.putExtra("provincia",oc.getProvincia());
+        intent.putExtra("distrito",oc.getDistrito());
+        intent.putExtra("unidad",oc.getUnidad());
+        intent.putExtra("fecha",oc.getFecha_cita());
+        intent.putExtra("hora",oc.getHora_cita());
+        intent.putExtra("especialidad",oc.getEspecialidad_());
+        intent.putExtra("detalle",oc.getDetalle_cita());
         getContext_().startActivity(intent);
     }
 
@@ -335,6 +353,12 @@ public class cCitasService implements Serializable
         intent.putExtra("hora",oc.getHora_cita());
         intent.putExtra("departamento",oc.getEspecialidad_());
         intent.putExtra("doctor",oc.getDoctor());
+        intent.putExtra("zona",oc.getZona());
+        intent.putExtra("provincia",oc.getProvincia());
+        intent.putExtra("distrito",oc.getDistrito());
+        intent.putExtra("unidad",oc.getUnidad());
+
+
         getContext_().startActivity(intent);
     }
     public void deleteObjRecycler(int id)

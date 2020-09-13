@@ -23,6 +23,53 @@
             >
         </AutoCompleteTextView>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/passport"
+        app:startIconTint="@color/colorPrimaryDark"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:inputType="number"
+            android:id="@+id/id_edittext_cedula"
+            android:layout_width="match_parent"
+            android:hint="@string/hint_cedula"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/edit_user"
+        app:startIconTint="@color/colorPrimaryDark"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_edittext_name"
+            android:layout_width="match_parent"
+            android:hint="@string/hint_datos"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/call_"
+        app:startIconTint="@color/colorPrimaryDark"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_edittext_telefono"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:maxLength="10"
+            android:hint="@string/hint_telefono"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <include
         layout="@layout/card_datos_login">
     </include>

@@ -80,6 +80,13 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
     private boolean banfoto=false;
     private AlertDialog alertDialog;
 
+    private TextInputEditText mTextInputEditTextZona;
+    private TextInputEditText mTextInputEditTextProvincia;
+    private TextInputEditText mTextInputEditTextDistrito;
+    private TextInputEditText mTextInputEditTextUnidad;
+
+
+
     public AgendarCitaFragment()
     {
     }
@@ -96,6 +103,14 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
         textInputEditText_detalle_cita = view_.findViewById(R.id._id_detalle_cita);
         button_cancelar = view_.findViewById(R.id._id_btn_cancelar_cita);
         button_agendar = view_.findViewById(R.id._id_btn_agendar_cita);
+
+        mTextInputEditTextZona = view_.findViewById(R.id.id_edittext_zona);
+        mTextInputEditTextProvincia = view_.findViewById(R.id.id_edittext_provincia);
+        mTextInputEditTextDistrito = view_.findViewById(R.id.id_editext_distrito);
+        mTextInputEditTextUnidad = view_.findViewById(R.id.id_edittext_unidad);
+
+
+
         OcHoraFechaViews = new cHoraFechaViews_(getContext());
         OcHoraFechaViews.setDatePickerDialog(datePickerDialog);
         OcHoraFechaViews.setTimePickerDialog(timePickerDialog);
@@ -299,6 +314,10 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
                     oC.setDetalle_cita(textInputEditText_detalle_cita.getText().toString());
                     oC.setDoctor(textInputEditText_especialista.getText().toString());
                     oC.setEspecialidad_(textInputEditText_especialidad.getText().toString());
+                    oC.setZona(mTextInputEditTextZona.getText().toString());
+                    oC.setProvincia(mTextInputEditTextProvincia.getText().toString());
+                    oC.setDistrito(mTextInputEditTextDistrito.getText().toString());
+                    oC.setUnidad(mTextInputEditTextUnidad.getText().toString());
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragment_container_master,new ReportSeguimientoFragment())

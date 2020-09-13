@@ -1,33 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
 android:orientation="vertical"
-android:weightSum="1"
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".Fragment.AgendarCitaFragment">
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_weight="@dimen/layout_weihgt_linear_layout_imagenview_generar_cita"
-    android:background="@color/colorSecondaryText"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/_imagen_view_agendar_cita"
-        android:scaleType="centerCrop"
-        android:src="@drawable/open_camera_open_galety"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </androidx.appcompat.widget.AppCompatImageView>
-</androidx.appcompat.widget.LinearLayoutCompat>
     <ScrollView
+        android:scrollbars="vertical"
         android:layout_margin="25dp"
-        android:layout_weight="@dimen/layout_weihgt_linear_layout_contenedor_datos_generar_cita"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <include
-                layout="@layout/views_datos_agendamiento">
-            </include>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/_imagen_view_agendar_cita"
+                android:scaleType="centerCrop"
+                android:src="@drawable/open_camera_open_galety"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </androidx.appcompat.widget.AppCompatImageView>
+            <TextView
+                android:textStyle="bold"
+                android:background="@drawable/border_cuadrado"
+                android:gravity="center_vertical"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:drawableStart="@drawable/fecha_agendar_cita"
+                android:id="@+id/_id_fecha_cita"
+                android:hint="@string/hint_fecha_"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                >
+            </TextView>
+            <TextView
+                android:layout_marginTop="3dp"
+                android:background="@drawable/border_cuadrado"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:drawableStart="@drawable/hora_agendar_cita"
+                android:id="@+id/_id_hora_cita"
+                android:hint="@string/hint_hora_"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                >
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                app:startIconDrawable="@drawable/departament_"
+                app:startIconTint="@color/colorPrimaryDark"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/_id_especialidad_cita"
+                    android:hint="@string/hint_tipo_especialidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                app:startIconDrawable="@drawable/doctor_"
+                app:startIconTint="@color/colorPrimaryDark"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/_id_especialista_cita"
+                    android:hint="@string/hint_especialista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                app:startIconDrawable="@drawable/actividad_agendar_cita"
+                app:startIconTint="@color/colorPrimaryDark"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/_id_actividad_cita"
+                    android:hint="@string/hint_tipo_actividad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                app:startIconDrawable="@drawable/detalle_agendar_cita"
+                app:startIconTint="@color/colorPrimaryDark"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/_id_detalle_cita"
+                    android:hint="@string/hint_detalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id_edittext_zona"
+                    android:hint="Zona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id_edittext_provincia"
+                    android:hint="Provincia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id_editext_distrito"
+                    android:hint="Distrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id_edittext_unidad"
+                    android:hint="Unidad"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_marginTop="15dp"
+                android:weightSum="1"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/_id_btn_cancelar_cita"
+                    android:textSize="@dimen/textsize_boton_agendar_cancelar"
+                    android:textStyle="bold"
+                    android:text="@string/btn_cancelar"
+                    android:layout_weight="0.5"
+                    android:theme="@style/RaisedButtonRedDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+                </androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/_id_btn_agendar_cita"
+                    android:textSize="@dimen/textsize_boton_agendar_cancelar"
+                    android:textStyle="bold"
+                    android:text="@string/btn_guardar"
+                    android:layout_weight="0.5"
+                    android:theme="@style/RaisedButtonDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+                </androidx.appcompat.widget.AppCompatButton>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -33,11 +33,18 @@ public class CreateUserLoginActivity extends AppCompatActivity implements View.O
     private Button button_cancelar;
     private TextInputEditText textInputEditText_user;
     private TextInputEditText textInputEditText_pass;
+
+    private TextInputEditText mTextViewName;
+    private TextInputEditText mTextViewTelefono;
+    private TextInputEditText mTextViewDni;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user_login);
         toolbar = findViewById(R.id.toolbar_);
+        mTextViewDni = findViewById(R.id.id_edittext_cedula);
+        mTextViewName = findViewById(R.id.id_edittext_name);
+        mTextViewTelefono = findViewById(R.id.id_edittext_telefono);
         autoCompleteTextView_= findViewById(R.id.auto_complete_rol);
         textInputEditText_pass= findViewById(R.id.textview_password_);
         textInputEditText_user= findViewById(R.id.textview_usuario_);
@@ -83,8 +90,15 @@ public class CreateUserLoginActivity extends AppCompatActivity implements View.O
         progressDialog.show();
         int rol=2;
         RequestQueue requestQueue = Volley.newRequestQueue(CreateUserLoginActivity.this);
-        String url_=getString(R.string.url_create_user)+"?user="+textInputEditText_user.getText().toString()
-                +"&pass="+textInputEditText_pass.getText().toString()+"&rol="+rol;
+
+        String url_=this.getString(R.string.url_create_user)+"?user="+textInputEditText_user.getText().toString()
+                +"&pass="+textInputEditText_pass.getText().toString()+"&rol="+rol+"&nombres="+mTextViewName.getText().toString()+
+                "&telefono="+mTextViewTelefono.getText().toString()+
+                "&dni="+mTextViewDni.getText().toString();
+
+
+        /*String url_=getString(R.string.url_create_user)+"?user="+textInputEditText_user.getText().toString()
+                +"&pass="+textInputEditText_pass.getText().toString()+"&rol="+rol;*/
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url_, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response)

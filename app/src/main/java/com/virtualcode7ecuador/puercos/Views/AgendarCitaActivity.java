@@ -45,6 +45,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.virtualcode7ecuador.puercos.LoginActivity.Ousuario;
+
 public class AgendarCitaActivity extends AppCompatActivity implements View.OnClickListener {
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
@@ -67,8 +69,27 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
     private String string_img_url;
     private String string_doctor_;
     private String string_actividad;
+
+    private String zona;
+    private String provincia;
+    private String distrito;
+    private String unidad;
+    private String especialidad;
+    private String detalle;
+
+    private String fecha;
+    private String hora;
+
+
     private TextInputEditText textInputEditText_especialidad;
     private TextInputEditText textInputEditText_especialista;
+
+
+    private TextInputEditText mTextInputEditTextZona;
+    private TextInputEditText mTextInputEditTextProvincia;
+    private TextInputEditText mTextInputEditTextDistrito;
+    private TextInputEditText mTextInputEditTextUnidad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +98,17 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
         string_img_url = getIntent().getStringExtra("url_img");
         string_doctor_ = getIntent().getStringExtra("doctor");
         string_actividad = getIntent().getStringExtra("actividad");
+
+        zona = getIntent().getStringExtra("zona");
+        provincia = getIntent().getStringExtra("provincia");
+        distrito = getIntent().getStringExtra("distrito");
+        unidad = getIntent().getStringExtra("unidad");
+        fecha = getIntent().getStringExtra("fecha");
+        hora = getIntent().getStringExtra("hora");
+        especialidad = getIntent().getStringExtra("especialidad");
+        detalle = getIntent().getStringExtra("detalle");
+
+
 
         imageView_ = findViewById(R.id._imagen_view_agendar_cita_);
         textInputEditText_fecha = findViewById(R.id._id_fecha_cita);
@@ -87,6 +119,13 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
         textInputEditText_detalle_cita = findViewById(R.id._id_detalle_cita);
         button_agendar = findViewById(R.id._id_btn_agendar_cita);
         button_cancelar = findViewById(R.id._id_btn_cancelar_cita);
+
+
+        mTextInputEditTextZona = findViewById(R.id.id_edittext_zona);
+        mTextInputEditTextProvincia = findViewById(R.id.id_edittext_provincia);
+        mTextInputEditTextDistrito = findViewById(R.id.id_editext_distrito);
+        mTextInputEditTextUnidad = findViewById(R.id.id_edittext_unidad);
+
     }
 
     @Override
@@ -97,12 +136,27 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
         textInputEditText_especialista.setEnabled(false);
         textInputEditText_actividad.setText(string_actividad);
         textInputEditText_especialista.setText(string_doctor_);
-        OcHoraFechaViews = new cHoraFechaViews_(AgendarCitaActivity.this);
+        mTextInputEditTextDistrito.setText(distrito);
+        mTextInputEditTextProvincia.setText(provincia);
+        mTextInputEditTextZona.setText(zona);
+        mTextInputEditTextUnidad.setText(unidad);
+        textInputEditText_hora.setText(hora);
+        textInputEditText_fecha.setText(fecha);
+        textInputEditText_detalle_cita.setText(detalle);
+        textInputEditText_especialidad.setText(especialidad);
+
+        /*OcHoraFechaViews = new cHoraFechaViews_(AgendarCitaActivity.this);
         OcHoraFechaViews.setDatePickerDialog(datePickerDialog);
         OcHoraFechaViews.setTimePickerDialog(timePickerDialog);
         OcHoraFechaViews.setTextInputEditText_fecha(textInputEditText_fecha);
-        OcHoraFechaViews.setTextInputEditText_hora(textInputEditText_hora);
-        textInputEditText_fecha.setOnClickListener(new View.OnClickListener() {
+        OcHoraFechaViews.setTextInputEditText_hora(textInputEditText_hora);*/
+
+
+
+
+
+
+        /*textInputEditText_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -114,7 +168,7 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View view) {
                 OcHoraFechaViews.obtener_TimePicker();
             }
-        });
+        });*/
         button_agendar.setOnClickListener(this);
         button_cancelar.setOnClickListener(this);
         super.onPostCreate(savedInstanceState);
@@ -256,7 +310,11 @@ public class AgendarCitaActivity extends AppCompatActivity implements View.OnCli
                     oC.setDetalle_cita(textInputEditText_detalle_cita.getText().toString());
                     oC.setDoctor(textInputEditText_especialista.getText().toString());
                     oC.setEspecialidad_(textInputEditText_especialidad.getText().toString());
-                    OcitasService.AgendarSeguimiento(oC);
+                    oC.setZona(mTextInputEditTextZona.getText().toString());
+                    oC.setProvincia(mTextInputEditTextProvincia.getText().toString());
+                    oC.setDistrito(mTextInputEditTextDistrito.getText().toString());
+                    oC.setUnidad(mTextInputEditTextUnidad.getText().toString());
+                    OcitasService.AgendarSeguimiento(oC,Ousuario.getUsuario_());
                 }else
                 {
                     cerrarProgressDialog();

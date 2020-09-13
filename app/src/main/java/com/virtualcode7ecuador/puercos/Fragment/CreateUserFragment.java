@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -35,6 +37,12 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     private Button button_cancelar;
     private TextInputEditText textInputEditText_user;
     private TextInputEditText textInputEditText_pass;
+
+    private TextInputEditText mTextViewName;
+    private TextInputEditText mTextViewTelefono;
+    private TextInputEditText mTextViewDni;
+
+
     public CreateUserFragment() {
         // Required empty public constructor
     }
@@ -43,6 +51,11 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view_ = inflater.inflate(R.layout.fragment_create_user, container, false);
+
+
+        mTextViewDni = view_.findViewById(R.id.id_edittext_cedula);
+        mTextViewName = view_.findViewById(R.id.id_edittext_name);
+        mTextViewTelefono = view_.findViewById(R.id.id_edittext_telefono);
         autoCompleteTextView_= view_.findViewById(R.id.auto_complete_rol);
         textInputEditText_pass=view_.findViewById(R.id.textview_password_);
         textInputEditText_user=view_.findViewById(R.id.textview_usuario_);
@@ -105,7 +118,10 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
             rol = 3;
         }
         String url_=getContext().getString(R.string.url_create_user)+"?user="+textInputEditText_user.getText().toString()
-                +"&pass="+textInputEditText_pass.getText().toString()+"&rol="+rol;
+                +"&pass="+textInputEditText_pass.getText().toString()+"&rol="+rol+"&nombres="+mTextViewName.getText().toString()+
+                "&telefono="+mTextViewTelefono.getText().toString()+
+                "&dni="+mTextViewDni.getText().toString();
+        Log.e("CREATEUSER",url_);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url_, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response)
