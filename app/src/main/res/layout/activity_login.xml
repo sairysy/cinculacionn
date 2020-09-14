@@ -36,7 +36,6 @@
             android:layout_marginRight="@dimen/margenRightLeft_card_datos_login"
             android:layout_marginLeft="@dimen/margenRightLeft_card_datos_login"
             android:textAlignment="textEnd"
-            android:text="@string/text_registrar_agendador_login"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold|italic"
             android:layout_width="match_parent"

@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent in = new Intent(LoginActivity.this, CreateUserLoginActivity.class);
-                startActivity(in);
+                /*Intent in = new Intent(LoginActivity.this, CreateUserLoginActivity.class);
+                startActivity(in);*/
             }
         });
         llenarRoles();

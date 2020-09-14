@@ -65,16 +65,16 @@ public class InicioMasterActivity extends AppCompatActivity
                                 .addToBackStack(null).commit();
                         break;
                     case R.id.id_new_user_master:
-                        if (Ousuario.getId_rol_usuario()==3)
-                        {
+                        //if (Ousuario.getId_rol_usuario()==3)
+                        //{
                             fragmentManager.beginTransaction().replace(R.id.fragment_container_master
                                     ,OcreateUserFragment)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                     .addToBackStack(null).commit();
-                        }else
+                        /*}else
                             {
                                 Toast.makeText(InicioMasterActivity.this, "NO POSEE PERMISOS ....", Toast.LENGTH_SHORT).show();
-                            }
+                            }*/
                         break;
                     case R.id.id_subir_master:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container_master
